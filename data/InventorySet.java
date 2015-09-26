@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 
 
+
 /**
  * Implementation of Inventory interface.
  * @see Data
@@ -93,6 +94,10 @@ final class InventorySet implements Inventory {
 	 */
 	void checkIn(Video video) {
 		// TODO
+		RecordObj rental = (RecordObj) data.get(video);
+		if (rental == null || rental.numOut == 0)
+			throw new IllegalArgumentException();
+		rental.numOut--;
 	}
 
 	/**
