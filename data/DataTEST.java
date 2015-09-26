@@ -1,6 +1,7 @@
 package myhw2.data;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 // TODO: complete the tests
@@ -72,7 +73,6 @@ public class DataTEST {
 			Data.newVideo("X", 2002, " ");
 			fail();
 		} catch (IllegalArgumentException e) { }
-	
 	}
 
 	@Test

@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.Collections;
 import java.util.Iterator;
 
+
+
 /**
  * Implementation of Inventory interface.
  * @see Data
@@ -27,12 +29,16 @@ final class InventorySet implements Inventory {
 
 	public int size() {
 		// TODO
-		return 0;
+		return data.size();
 	}
 
 	public Record get(Video v) {
 		// TODO
-		return null;
+		Record copy = data.get(v);
+		if (copy == null)
+			return null;
+		
+		return copy;
 	}
 
 	public Iterator<Record> iterator() {
