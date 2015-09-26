@@ -48,6 +48,7 @@ final class InventorySet implements Inventory {
 	public Iterator<Record> iterator(Comparator<Record> comparator) {
 		// Hint: Look at Collections.sort
 		// TODO
+		
 		return null;
 	}
 
@@ -75,6 +76,13 @@ final class InventorySet implements Inventory {
 	 */
 	void checkOut(Video video) {
 		// TODO
+		RecordObj rental = (RecordObj) data.get(video);
+		
+		if (rental == null || rental.numOut == rental.numOwned)
+			throw new IllegalArgumentException("All out of this movie or not in database");
+		
+		rental.numOut++;
+		rental.numRentals++;	
 	}
 
 	/**
