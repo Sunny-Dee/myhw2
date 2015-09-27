@@ -17,6 +17,14 @@ final class CmdAdd implements Command {
 	}
 	public boolean run() {
 		// TODO
-		return false;
+		try {
+			inventory.addNumOwned( video, change);
+			return true;
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
+		
+		
+
 	}
 }

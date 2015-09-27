@@ -50,6 +50,7 @@ final class InventorySet implements Inventory {
 		// Hint: Look at Collections.sort
 		// TODO
 		
+		
 		return null;
 	}
 
@@ -67,6 +68,22 @@ final class InventorySet implements Inventory {
 	 */
 	void addNumOwned(Video video, int change) {
 		// TODO
+		if (video == null || change == 0)
+			throw new IllegalArgumentException();
+
+		RecordObj r = (RecordObj) data.get(video);
+
+		if (r == null && change < 1) {
+			throw new IllegalArgumentException();
+		} else if (r == null) {
+			data.put(video, new RecordObj(video, change, 0, 0));
+		} else if (r.numOwned+change < r.numOut) {
+			throw new IllegalArgumentException();
+		} else if (r.numOwned+change < 1) {
+			data.remove(video);
+		} else {
+			r.numOwned += change;
+		}
 	}
 
 	/**
@@ -105,6 +122,7 @@ final class InventorySet implements Inventory {
 	 */
 	void clear() {
 		// TODO
+		data.clear();
 	}
 
 	public String toString() {
