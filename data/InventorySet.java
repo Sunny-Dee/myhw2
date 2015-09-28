@@ -1,10 +1,14 @@
 package myhw2.data;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Comparator;
 import java.util.Collections;
 import java.util.Iterator;
+
 
 
 
@@ -49,9 +53,11 @@ final class InventorySet implements Inventory {
 	public Iterator<Record> iterator(Comparator<Record> comparator) {
 		// Hint: Look at Collections.sort
 		// TODO
-		
-		
-		return null;
+
+		Collection<Record> records = data.values();
+		List<Record> recordsList = new ArrayList <Record> (records);
+		Collections.sort(recordsList, comparator);
+		return recordsList.iterator();
 	}
 
 	/**

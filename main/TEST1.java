@@ -44,5 +44,21 @@ public class TEST1 {
 		assertEquals(2, inventory.size());
 
 		// TODO
+		assertTrue(Data.newOutCmd(inventory, v2).run());
+		expect(v2,"Title2 (2001) : Director2 [1,1,1]");
+
+		assertTrue(Data.newInCmd(inventory, v2).run());
+		expect(v2,"Title2 (2001) : Director2 [1,0,1]");
+
+		assertTrue(Data.newAddCmd(inventory, v2, -1).run());
+		assertEquals(1, inventory.size());
+		expect(v1,"Title1 (2000) : Director1 [10,0,0]");
+
+		Command outCmd = Data.newOutCmd(inventory, v1);
+		assertTrue(outCmd.run());
+		assertTrue(outCmd.run());
+		assertTrue(outCmd.run());
+		assertTrue(outCmd.run());
+		expect(v1,"Title1 (2000) : Director1 [10,4,4]");
 	}
 }
