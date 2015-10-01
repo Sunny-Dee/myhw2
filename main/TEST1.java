@@ -25,15 +25,22 @@ public class TEST1 {
 	public void test1() {
 		Command clearCmd = Data.newClearCmd(inventory);
 		clearCmd.run();
-
+		assertTrue(clearCmd.run());
 		Video v1 = Data.newVideo("Title1", 2000, "Director1");
 		assertEquals(0, inventory.size());
 		assertTrue(Data.newAddCmd(inventory, v1, 5).run());
 		assertEquals(1, inventory.size());
 		assertTrue(Data.newAddCmd(inventory, v1, 5).run());
 		assertEquals(1, inventory.size());
-		// System.out.println(inventory.get(v1));
-		expect(v1,"Title1 (2000) : Director1 [10,0,0]");
+		assertTrue(Data.newAddCmd(inventory, v1, -5).run());
+		assertEquals(1, inventory.size());
+		assertEquals(5, inventory.get(v1).numOwned());
+		assertTrue(Data.newAddCmd(inventory, v1, -5).run());
+		assertEquals(0, inventory.size());
+		assertTrue(Data.newAddCmd(inventory, v1, 5).run());
+		
+
+		expect(v1,"Title1 (2000) : Director1 [5,0,0]");
 
 		Video v2 = Data.newVideo("Title2", 2001, "Director2");
 		assertTrue(Data.newAddCmd(inventory, v2, 1).run());
@@ -44,21 +51,29 @@ public class TEST1 {
 		assertEquals(2, inventory.size());
 
 		// TODO
+		Video v3 = Data.newVideo("The Big Lebowski", 1998, "Coen Brothers");
 		assertTrue(Data.newOutCmd(inventory, v2).run());
 		expect(v2,"Title2 (2001) : Director2 [1,1,1]");
+		assertFalse(Data.newOutCmd(inventory, v3).run());
+		assertFalse(Data.newOutCmd(inventory, v2).run());
 
 		assertTrue(Data.newInCmd(inventory, v2).run());
 		expect(v2,"Title2 (2001) : Director2 [1,0,1]");
+		assertFalse(Data.newInCmd(inventory, v2).run());
+		assertFalse(Data.newInCmd(inventory, v3).run());
 
 		assertTrue(Data.newAddCmd(inventory, v2, -1).run());
 		assertEquals(1, inventory.size());
-		expect(v1,"Title1 (2000) : Director1 [10,0,0]");
+		expect(v1,"Title1 (2000) : Director1 [5,0,0]");
 
 		Command outCmd = Data.newOutCmd(inventory, v1);
 		assertTrue(outCmd.run());
 		assertTrue(outCmd.run());
 		assertTrue(outCmd.run());
 		assertTrue(outCmd.run());
-		expect(v1,"Title1 (2000) : Director1 [10,4,4]");
+		expect(v1,"Title1 (2000) : Director1 [5,4,4]");
+		
+		assertTrue(clearCmd.run());
+		assertEquals(0, inventory.size());
 	}
 }

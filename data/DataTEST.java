@@ -2,10 +2,20 @@ package myhw2.data;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import myhw2.command.Command;
+
 import org.junit.Test;
 
 // TODO: complete the tests
 public class DataTEST {
+	InventorySet s = new InventorySet();
+	final VideoObj v1 = new VideoObj( "A", 2000, "B" );
+	final VideoObj v2 = new VideoObj( "B", 2000, "B" );
+	final VideoObj v1copy = new VideoObj( "A", 2000, "B" );
+	
 	@Test
 	public void testConstructorAndAttributes() {
 		String title1 = "XX";
@@ -82,4 +92,6 @@ public class DataTEST {
 		s = Data.newVideo(" A ",2000," B ").toString();
 		assertEquals( s, "A (2000) : B" );
 	}
+	
+
 }

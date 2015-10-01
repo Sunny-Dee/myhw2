@@ -2,11 +2,10 @@ package myhw2.data;
 
 import static org.junit.Assert.*;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-
-
 import org.junit.Test;
 
 // TODO: complete the tests
@@ -105,20 +104,23 @@ public class InventoryTEST {
 	@Test
 	public void testIterator2() {
 		// TODO
-		s.addNumOwned(v1, 1);
-		s.addNumOwned(v2, 1);
+		s.addNumOwned(v1, 10);
+		s.addNumOwned(v2, 10);
+		s.checkOut(v2);
+		s.checkOut(v2);
+	
 
 		Set<VideoObj> expected = new HashSet<VideoObj>();
-		expected.add(v1);
 		expected.add(v2);
+		expected.add(v1);
 		
-		Iterator<Record> i = s.iterator();
-		while(i.hasNext()) {
-			Record r = i.next();
-			assertTrue(expected.contains(r.video()));
-			expected.remove(r.video());
-		}
-		assertTrue(expected.isEmpty());
+		
+		Iterator<Record> i = s.iterator(new Compar());
+		Record r = i.next();
+
+		assertEquals(r.video(), v2);
+		r = i.next();
+		assertEquals(r.video(), v1);
 	}
 
 }
